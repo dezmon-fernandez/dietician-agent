@@ -1,0 +1,28 @@
+{
+  "name": "MY_APP_NAME-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bootstrap": "bash scripts/bootstrap.sh",
+    "docker:up": "docker compose -f packages/backend/docker-compose.yml up -d && pnpm db:migrate:dev && pnpm db:generate:dev",
+    "docker:down": "docker compose -f packages/backend/docker-compose.yml down",
+    "docker:reset": "docker compose -f packages/backend/docker-compose.yml down --rmi all --volumes --remove-orphans",
+    "backend:dev": "pnpm --filter backend dev",
+    "frontend:dev": "pnpm --filter frontend dev",
+    "db:migrate:dev": "pnpm --filter backend db:migrate:dev",
+    "db:generate:dev": "pnpm --filter backend db:generate:dev",
+    "load-test": "artillery run load-test.yml"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "prettier": "^3.4.2"
+  }
+}

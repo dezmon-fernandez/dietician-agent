@@ -1,0 +1,54 @@
+# name: Deploy to DigitalOcean App Platform
+
+# on:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - 'packages/backend/**'
+#       - '.github/workflows/deploy.yml'
+#       - 'package.json'
+#       - 'pnpm-lock.yaml'
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Install doctl
+#         uses: digitalocean/action-doctl@v2
+#         with:
+#           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+#       - name: Validate app spec
+#         run: doctl apps spec validate packages/backend/app_spec.yml
+
+#       - name: Deploy to DigitalOcean App Platform
+#         run: doctl apps update ${{ secrets.DIGITALOCEAN_APP_ID }} --spec packages/backend/app_spec.yml --update-sources --wait
+
+#       - name: Verify Deployment
+#         run: |
+#           doctl apps list --format ID,Spec.Name,DefaultIngress,Updated --no-header | grep ${{ secrets.DIGITALOCEAN_APP_ID }}
+
+#       # Add frontend deployment steps
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '20'
+
+#       - name: Install pnpm
+#         uses: pnpm/action-setup@v2
+#         with:
+#           version: latest
+#           run_install: false
+
+#       - name: Install dependencies
+#         run: pnpm install
+
+#       - name: Deploy to Cloudflare Pages
+#         env:
+#           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+#           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+#         run: pnpm --filter frontend deploy:cf

@@ -1,0 +1,30 @@
+config:
+  target: 'https://api.MY_APP_NAME.com'
+  phases:
+    - duration: 30
+      arrivalRate: 100
+      name: 'Warm up'
+    - duration: 30
+      arrivalRate: 200
+      name: 'Medium load'
+    - duration: 30
+      arrivalRate: 400
+      name: 'Heavy load'
+    - duration: 30
+      arrivalRate: 800
+      name: 'Extreme load'
+    - duration: 30
+      arrivalRate: 1600
+      name: 'Breaking point'
+  defaults:
+    headers:
+      Content-Type: 'application/json'
+
+scenarios:
+  - name: 'Maximum RPS test'
+    flow:
+      - get:
+          url: '/auth/google'
+      - think: 1
+      - get:
+          url: '/api/health'

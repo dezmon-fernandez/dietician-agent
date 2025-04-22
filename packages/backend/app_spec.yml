@@ -1,0 +1,156 @@
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+domains:
+  - domain: api.MY_APP_NAME.com
+    type: PRIMARY
+envs:
+  - key: NODE_ENV
+    scope: RUN_AND_BUILD_TIME
+    value: production
+  - key: PORT
+    scope: RUN_AND_BUILD_TIME
+    value: '3000'
+  - key: API_URL
+    scope: RUN_AND_BUILD_TIME
+    value: https://api.MY_APP_NAME.com
+  - key: FRONTEND_URL
+    scope: RUN_AND_BUILD_TIME
+    value: https://MY_APP_NAME.com
+  - key: GOOGLE_CLIENT_ID
+    scope: RUN_AND_BUILD_TIME
+    value: 583647500887-2e28dk0tctembmnn431u1dacc6ng6fcl.apps.googleusercontent.com
+  - key: GOOGLE_CLIENT_SECRET
+    scope: RUN_AND_BUILD_TIME
+    value: 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
+  - key: SESSION_SECRET
+    scope: RUN_AND_BUILD_TIME
+    value: alakj8livwl2123jalskjfaeDaisy!!12lkj12
+  - key: AMAZON_CLIENT_ID
+    scope: RUN_AND_BUILD_TIME
+    value: amzn1.application-oa2-client.6c27e82f035b4973b421ad96a79f90d9
+  - key: AMAZON_CLIENT_SECRET
+    scope: RUN_AND_BUILD_TIME
+    value: amzn1.oa2-cs.v1.0c2b2ac196a08899fb85f868d51cc2c01871d42c7871e37044f70407ff44fc90
+  - key: AMAZON_CALLBACK_URL
+    scope: RUN_AND_BUILD_TIME
+    value: https://MY_APP_NAME.com/auth/amazon/callback
+  - key: DATABASE_URL
+    scope: RUN_AND_BUILD_TIME
+    value: postgresql://neondb_owner:npg_zZPsnL1im2SE@ep-raspy-paper-a476jaoz-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require
+  - key: REDIS_URL
+    scope: RUN_AND_BUILD_TIME
+    value: redis://default:ASk-AAIjcDFjY2EzNmVkNTlmMGM0ZjgxOTI1N2FlYWFmODcyOGQ3M3AxMA@famous-swift-10558.upstash.io:6379
+  - key: POSTGRES_USER
+    scope: RUN_AND_BUILD_TIME
+    value: MY_APP_NAME
+  - key: POSTGRES_PASSWORD
+    scope: RUN_AND_BUILD_TIME
+    value: MY_APP_NAME
+  - key: POSTGRES_DB
+    scope: RUN_AND_BUILD_TIME
+    value: MY_APP_NAME
+  - key: OPENAI_API_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: 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
+  - key: RESEND_API_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: re_4UGGcjiA_6ffxDbu2sard27zsHxj23yca
+  - key: BETTER_AUTH_SECRET
+    scope: RUN_AND_BUILD_TIME
+    value: alkawfe234l44449akefawf23asf
+features:
+  - buildpack-stack=ubuntu-22
+ingress:
+  rules:
+    - component:
+        name: MY_APP_NAME-packages-backend
+      match:
+        path:
+          prefix: /
+name: MY_APP_NAME-backend
+region: sfo
+services:
+  - dockerfile_path: packages/backend/Dockerfile
+    envs:
+      - key: NODE_ENV
+        scope: RUN_AND_BUILD_TIME
+        value: production
+      - key: PORT
+        scope: RUN_AND_BUILD_TIME
+        value: '3000'
+      - key: API_URL
+        scope: RUN_AND_BUILD_TIME
+        value: https://api.MY_APP_NAME.com
+      - key: FRONTEND_URL
+        scope: RUN_AND_BUILD_TIME
+        value: https://MY_APP_NAME.com
+      - key: GOOGLE_CLIENT_ID
+        scope: RUN_AND_BUILD_TIME
+        value: 1080357920658-fumrmeiienqmd8os92urknn3ehkh6jht.apps.googleusercontent.com
+      - key: GOOGLE_CLIENT_SECRET
+        scope: RUN_AND_BUILD_TIME
+        value: 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
+      - key: SESSION_SECRET
+        scope: RUN_AND_BUILD_TIME
+        value: alakj8livwl2123jalskjfaeDaisy!!12lkj12
+      - key: AMAZON_CLIENT_ID
+        scope: RUN_AND_BUILD_TIME
+        value: amzn1.application-oa2-client.6c27e82f035b4973b421ad96a79f90d9
+      - key: AMAZON_CLIENT_SECRET
+        scope: RUN_AND_BUILD_TIME
+        value: amzn1.oa2-cs.v1.0c2b2ac196a08899fb85f868d51cc2c01871d42c7871e37044f70407ff44fc90
+      - key: AMAZON_CALLBACK_URL
+        scope: RUN_AND_BUILD_TIME
+        value: https://MY_APP_NAME.com/auth/amazon/callback
+      - key: DATABASE_URL
+        scope: RUN_AND_BUILD_TIME
+        value: postgresql://doadmin:AVNS_Z9KqpVGp6WCYJKJR6Ct@app-cf7957d1-ed42-4bd4-bc6f-f8c82b777611-do-user-6163677-0.k.db.ondigitalocean.com:25060/defaultdb?sslmode=require
+      - key: REDIS_URL
+        scope: RUN_AND_BUILD_TIME
+        value: rediss://default:ASk-AAIjcDFjY2EzNmVkNTlmMGM0ZjgxOTI1N2FlYWFmODcyOGQ3M3AxMA@famous-swift-10558.upstash.io:6379
+      - key: POSTGRES_USER
+        scope: RUN_AND_BUILD_TIME
+        value: MY_APP_NAME
+      - key: POSTGRES_PASSWORD
+        scope: RUN_AND_BUILD_TIME
+        value: MY_APP_NAME
+      - key: POSTGRES_DB
+        scope: RUN_AND_BUILD_TIME
+        value: MY_APP_NAME
+      - key: OPENAI_API_KEY
+        scope: RUN_AND_BUILD_TIME
+        value: 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
+      - key: RESEND_API_KEY
+        scope: RUN_AND_BUILD_TIME
+        value: re_4UGGcjiA_6ffxDbu2sard27zsHxj23yca
+      - key: STRIPE_SECRET_KEY
+        scope: RUN_AND_BUILD_TIME
+        value: sk_test_51QZkiIIzGoOWM35wZwGI8ygwzoIvLQmn5r3ZoRLYA5ijQqIms9bkqZGSnIqObHYuxLr1a5t8hNDytXywimDUAFWS00kriIFjTD
+      - key: STRIPE_PRICE_ID
+        scope: RUN_AND_BUILD_TIME
+        value: price_1QZklLIzGoOWM35wiyWVTNWL
+      - key: STRIPE_WEBHOOK_SECRET
+        scope: RUN_AND_BUILD_TIME
+        value: whsec_747c95bb0c750a5c468514e7f493135aca4b0b0163a4f0c6f943d383e6be442d
+      - key: JWT_ACCESS_SECRET
+        scope: RUN_AND_BUILD_TIME
+        value: awlekfj12lkfaw123l1k23jl12k3
+      - key: JWT_REFRESH_SECRET
+        scope: RUN_AND_BUILD_TIME
+        value: 11lf8dlsa23sz98alwe
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        value: postgresql://doadmin:AVNS_Z9KqpVGp6WCYJKJR6Ct@app-cf7957d1-ed42-4bd4-bc6f-f8c82b777611-do-user-6163677-0.k.db.ondigitalocean.com:25060/defaultdb?sslmode=require
+      - key: BETTER_AUTH_SECRET
+        scope: RUN_AND_BUILD_TIME
+        value: alkawfe234l44449akefawf23asf
+    github:
+      branch: main
+      repo: etokatlian/MY_APP_NAME
+    http_port: 3000
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    name: MY_APP_NAME-packages-backend
+    run_command: /app/entrypoint.sh
+    source_dir: packages/backend

@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    container_name: MY_APP_NAME-db
+    environment:
+      POSTGRES_USER: MY_APP_NAME
+      POSTGRES_PASSWORD: MY_APP_NAME
+      POSTGRES_DB: MY_APP_NAME-db
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  redis:
+    image: redis:alpine
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_dev_data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - app-network
+
+  minio:
+    image: minio/minio
+    container_name: MY_APP_NAME-minio
+    ports:
+      - '9090:9000'
+      - '9091:9001'
+    volumes:
+      - minio_data:/data
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - app-network
+
+  minio-setup:
+    build:
+      context: .
+      dockerfile: minio-setup.Dockerfile
+    depends_on:
+      minio:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: on-failure
+
+volumes:
+  db_data:
+  redis_dev_data:
+  minio_data:
+
+networks:
+  app-network:
+    driver: bridge
